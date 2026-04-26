@@ -1,0 +1,259 @@
+---
+import type { Item } from "../data/types";
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<!-- FAB trigger -->
+<button id="thumb-fab" class="thumb-fab" aria-label="Ver todos los artículos">
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="8" height="8" fill="currentColor"/>
+    <rect x="13" y="1" width="8" height="8" fill="currentColor"/>
+    <rect x="1" y="13" width="8" height="8" fill="currentColor"/>
+    <rect x="13" y="13" width="8" height="8" fill="currentColor"/>
+  </svg>
+</button>
+
+<!-- Overlay -->
+<div id="thumb-overlay" class="thumb-overlay" aria-hidden="true">
+  <div class="thumb-overlay__header">
+    <span class="thumb-overlay__title">Todos los artículos ({items.length})</span>
+    <button id="thumb-close" class="thumb-close" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="square"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="square"/>
+      </svg>
+    </button>
+  </div>
+  <div class="thumb-overlay__body">
+    <div class="thumb-grid">
+      {items.map((item, i) => {
+        const rawSrc = item.image.replace("/images/", "/raw-images/");
+        return (
+          <button
+            class:list={["thumb-card", { "thumb-card--sold": item.sold }]}
+            data-slide-index={i + 1}
+            aria-label={`Ir a ${item.name}`}
+          >
+            <div class="thumb-card__image-wrap">
+              <img
+                src={item.image}
+                alt={item.name}
+                class="thumb-card__img"
+                loading="lazy"
+                onerror={`this.onerror=null;this.src='${rawSrc}'`}
+              />
+              {item.sold && <div class="thumb-card__vendido">VENDIDO</div>}
+            </div>
+            <div class="thumb-card__label">
+              <span class="thumb-card__name">{item.name}</span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<style>
+  .thumb-fab {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 100;
+    width: 54px;
+    height: 54px;
+    background: var(--bg);
+    border: var(--border);
+    box-shadow: var(--shadow-lime);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .thumb-fab:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--accent);
+  }
+
+  .thumb-fab:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px var(--accent);
+  }
+
+  .thumb-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    will-change: transform;
+  }
+
+  .thumb-overlay__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.75rem;
+    border-bottom: var(--border);
+    flex-shrink: 0;
+  }
+
+  .thumb-overlay__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .thumb-close {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: var(--border);
+    box-shadow: var(--shadow-lime);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+    flex-shrink: 0;
+  }
+
+  .thumb-close:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--accent);
+  }
+
+  .thumb-close:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px var(--accent);
+  }
+
+  .thumb-overlay__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1.75rem 2rem;
+  }
+
+  .thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .thumb-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: var(--border);
+    box-shadow: var(--shadow-lime);
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.1s, box-shadow 0.1s;
+    padding: 0;
+  }
+
+  .thumb-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px var(--accent);
+  }
+
+  .thumb-card--sold .thumb-card__image-wrap {
+    filter: grayscale(0.7) brightness(0.85);
+  }
+
+  .thumb-card__image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: #e8e3da;
+    overflow: hidden;
+  }
+
+  .thumb-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.75rem;
+    display: block;
+  }
+
+  .thumb-card__vendido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-weight: 900;
+    color: white;
+    background: #ff3333;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px #000;
+    pointer-events: none;
+    padding: 0.1em 0.35em;
+    white-space: nowrap;
+  }
+
+  .thumb-card__label {
+    padding: 0.6rem 0.75rem;
+    border-top: var(--border);
+  }
+
+  .thumb-card__name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  const fab = document.getElementById("thumb-fab")!;
+  const overlay = document.getElementById("thumb-overlay")!;
+  const closeBtn = document.getElementById("thumb-close")!;
+
+  function openOverlay() {
+    overlay.setAttribute("aria-hidden", "false");
+    gsap.fromTo(
+      overlay,
+      { y: "100%" },
+      { y: "0%", duration: 0.5, ease: "power3.out" }
+    );
+  }
+
+  function closeOverlay() {
+    gsap.to(overlay, {
+      y: "100%",
+      duration: 0.4,
+      ease: "power3.in",
+      onComplete: () => overlay.setAttribute("aria-hidden", "true"),
+    });
+  }
+
+  fab.addEventListener("click", openOverlay);
+  closeBtn.addEventListener("click", closeOverlay);
+
+  overlay.addEventListener("click", (e) => {
+    const card = (e.target as HTMLElement).closest<HTMLElement>(".thumb-card");
+    if (!card) return;
+    const index = Number(card.dataset.slideIndex);
+    closeOverlay();
+    // goTo is exposed on window by index.astro
+    (window as any).goTo(index);
+  });
+</script>

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSlide from "../components/HeroSlide.astro";
 import ItemSlide from "../components/ItemSlide.astro";
+import ThumbnailGrid from "../components/ThumbnailGrid.astro";
 import items from "../data/items.json";
 ---
 
@@ -16,6 +17,7 @@ import items from "../data/items.json";
       }
     </div>
   </div>
+  <ThumbnailGrid items={items} />
 </BaseLayout>
 
 <style is:global>
@@ -65,6 +67,7 @@ import items from "../data/items.json";
     current = index;
     slides[index].scrollIntoView({ behavior: "smooth" });
   }
+  (window as any).goTo = goTo;
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") goTo(current + 1);
