@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Me Estoy Mudando y Vendo Todo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800;12..96,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5F0E8;
+      --accent: #AAFF00;
+      --black: #000000;
+      --red: #FF3333;
+      --border: 3px solid #000000;
+      --shadow-lime: 6px 6px 0px #AAFF00;
+      --shadow-black: 6px 6px 0px #000000;
+      --font-display: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
+
+    html, body, #root {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Slideshow container */
+    .stage {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+    }
+
+    /* ──────── HERO ──────── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero__eyebrow {
+      font-family: var(--font-body);
+      font-size: clamp(11px, 1.4vw, 15px);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 2rem;
+      opacity: 0.5;
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 11rem);
+      font-weight: 900;
+      line-height: 0.9;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+      max-width: 16ch;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      color: var(--black);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero__title em::after {
+      content: '';
+      position: absolute;
+      bottom: 0.06em;
+      left: 0; right: 0;
+      height: 0.14em;
+      background: var(--accent);
+      z-index: -1;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(13px, 1.5vw, 18px);
+      font-weight: 500;
+      color: var(--black);
+      margin-top: 2.5rem;
+      opacity: 0.7;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.4;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .hero__scroll svg { display: block; }
+
+    /* ──────── ITEM SLIDE ──────── */
+    .item-slide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100%;
+    }
+
+    .item-slide__image-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(2rem, 5vw, 5rem);
+      background: var(--bg);
+    }
+
+    .item-slide__image-frame {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      aspect-ratio: 4/3;
+      border: var(--border);
+      box-shadow: var(--shadow-lime);
+      background: #E8E3DA;
+      overflow: hidden;
+      transition: box-shadow 0.15s ease;
+    }
+
+    .item-slide__image-frame.sold {
+      filter: grayscale(0.7) brightness(0.85);
+    }
+
+    .item-slide__content-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 5vw, 5rem) clamp(2rem, 5vw, 5rem) clamp(2rem, 5vw, 5rem) 2rem;
+      border-left: var(--border);
+    }
+
+    .item-slide__slide-num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.35;
+      margin-bottom: 1.5rem;
+    }
+
+    .item-slide__name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.92;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .item-slide__brand {
+      font-family: var(--font-body);
+      font-size: clamp(12px, 1.2vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .item-slide__desc {
+      font-family: var(--font-body);
+      font-size: clamp(13px, 1.3vw, 16px);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--black);
+      opacity: 0.75;
+      max-width: 42ch;
+      margin-bottom: 2rem;
+    }
+
+    .item-slide__price {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3.5rem);
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2.5rem;
+    }
+
+    /* CTA Button */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--accent);
+      border: var(--border);
+      box-shadow: var(--shadow-black);
+      font-family: var(--font-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 700;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      user-select: none;
+      width: fit-content;
+      transform: translate(0, 0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    .btn-cta:not(:disabled):hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px #000000;
+    }
+
+    .btn-cta:not(:disabled):active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px #000000;
+    }
+
+    .btn-cta:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: #ccc;
+    }
+
+    .btn-cta.added {
+      background: var(--bg);
+    }
+
+    /* VENDIDO stamp */
+    .vendido-stamp {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .vendido-stamp__inner {
+      background: var(--red);
+      border: 3px solid var(--black);
+      box-shadow: 4px 4px 0px #000;
+      padding: 10px 24px;
+      transform: rotate(-15deg);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 4.5rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* SVG Placeholder */
+    .img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ──────── FLOATING BUTTONS ──────── */
+    .floating-btns {
+      position: fixed;
+      bottom: 2rem;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 2rem;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .fab {
+      pointer-events: all;
+      width: 54px; height: 54px;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow-lime);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transform: translate(0, 0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      user-select: none;
+    }
+
+    .fab:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px var(--accent);
+    }
+
+    .fab:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px var(--accent);
+    }
+
+    .fab__badge {
+      position: absolute;
+      top: -10px; right: -10px;
+      width: 22px; height: 22px;
+      background: var(--accent);
+      border: 2px solid var(--black);
+      border-radius: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    /* ──────── NAV ARROWS ──────── */
+    .nav-arrows {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .nav-arrow {
+      pointer-events: all;
+      width: 48px; height: 48px;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow-lime);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transform: translate(0, 0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+      user-select: none;
+    }
+
+    .nav-arrow:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px var(--accent);
+    }
+
+    .nav-arrow:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px var(--accent);
+    }
+
+    .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* ──────── THUMBNAIL GRID ──────── */
+    .thumb-grid-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+    }
+
+    .thumb-grid-overlay.open {
+      transform: translateY(0);
+    }
+
+    .thumb-grid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 2.5rem;
+      border-bottom: var(--border);
+      flex-shrink: 0;
+    }
+
+    .thumb-grid-header__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--black);
+    }
+
+    .thumb-grid-close {
+      width: 44px; height: 44px;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow-lime);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transform: translate(0,0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    .thumb-grid-close:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px var(--accent);
+    }
+
+    .thumb-grid-close:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px var(--accent);
+    }
+
+    .thumb-grid-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2.5rem;
+    }
+
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .thumb-card {
+      border: var(--border);
+      box-shadow: var(--shadow-lime);
+      background: var(--bg);
+      cursor: pointer;
+      overflow: hidden;
+      transform: translate(0,0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    .thumb-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0px var(--accent);
+    }
+
+    .thumb-card:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px var(--accent);
+    }
+
+    .thumb-card__img {
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      background: #E8E3DA;
+    }
+
+    .thumb-card__img.sold { filter: grayscale(0.7) brightness(0.85); }
+
+    .thumb-card__label {
+      padding: 10px 14px;
+      border-top: var(--border);
+    }
+
+    .thumb-card__name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    .thumb-card__price {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--black);
+      opacity: 0.5;
+      margin-top: 2px;
+    }
+
+    .thumb-vendido {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .thumb-vendido__label {
+      background: var(--red);
+      border: 2px solid #000;
+      padding: 4px 10px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.06em;
+      transform: rotate(-15deg);
+    }
+
+    /* ──────── CART DRAWER ──────── */
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(400px, 100vw);
+      height: 100%;
+      background: var(--bg);
+      border-left: var(--border);
+      box-shadow: -8px 0 0 0 var(--accent);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-drawer__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.75rem 1.75rem;
+      border-bottom: var(--border);
+      flex-shrink: 0;
+    }
+
+    .cart-drawer__title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .cart-drawer__close {
+      width: 36px; height: 36px;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: 4px 4px 0 var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+
+    .cart-drawer__close:hover { box-shadow: 4px 4px 0 #000; }
+
+    .cart-drawer__body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      opacity: 0.4;
+    }
+
+    .cart-empty__icon { font-size: 3rem; }
+    .cart-empty__text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      border: var(--border);
+      box-shadow: 4px 4px 0 var(--accent);
+      padding: 0.75rem;
+      background: var(--bg);
+    }
+
+    .cart-item__thumb {
+      aspect-ratio: 1;
+      background: #E8E3DA;
+      border: 2px solid #000;
+      overflow: hidden;
+    }
+
+    .cart-item__name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .cart-item__price {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+
+    .cart-item__remove {
+      background: none; border: none;
+      cursor: pointer; font-size: 18px;
+      opacity: 0.4; padding: 4px;
+    }
+
+    .cart-item__remove:hover { opacity: 1; }
+
+    .cart-drawer__footer {
+      padding: 1.5rem 1.75rem;
+      border-top: var(--border);
+      flex-shrink: 0;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+    }
+
+    .cart-total__label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    .cart-total__amount {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      border: var(--border);
+      box-shadow: var(--shadow-black);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transform: translate(0,0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    .btn-whatsapp:active {
+      transform: translate(3px,3px);
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    /* ──────── MARQUEES ──────── */
+    .marquee-strip {
+      width: 100%;
+      overflow: hidden;
+      border-top: var(--border);
+      border-bottom: var(--border);
+      background: var(--accent);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      height: 48px;
+    }
+
+    .marquee-strip--sm {
+      height: 36px;
+      background: var(--black);
+    }
+
+    .marquee-strip--sm .marquee-track { animation-duration: 18s; }
+    .marquee-strip--sm .marquee-item { color: var(--bg); }
+    .marquee-strip--sm .marquee-sep { color: var(--accent); }
+
+    .marquee-track {
+      display: inline-flex;
+      align-items: center;
+      animation: marquee-scroll 22s linear infinite;
+      will-change: transform;
+    }
+
+    .marquee-track--reverse {
+      animation-direction: reverse;
+      animation-duration: 26s;
+    }
+
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      padding: 0 0.5rem;
+      white-space: nowrap;
+    }
+
+    .marquee-strip--sm .marquee-item {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .marquee-sep {
+      font-size: 18px;
+      color: var(--black);
+      opacity: 0.5;
+      padding: 0 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Hero marquee positioning */
+    .hero__marquees {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Item slide bottom marquee */
+    .item-marquee-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+    }
+
+    /* ──────── MOBILE ──────── */
+    @media (max-width: 700px) {
+      .item-slide {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        overflow-y: auto;
+      }
+      .item-slide__content-panel {
+        border-left: none;
+        border-top: var(--border);
+      }
+      .nav-arrows { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ── DATA ── */
+const ITEMS = [
+  {
+    id: 1,
+    name: "Sofá Sectional",
+    brand: "IKEA — Kivik",
+    desc: "Sofá sectional de 3 plazas + chaise longue. Tapizado en lino gris perla. Estructura impecable, sin manchas. 2 años de uso.",
+    price: 350,
+    sold: false,
+    color: "#C8C0B0",
+    label: "sofá sectional, 3 plazas",
+  },
+  {
+    id: 2,
+    name: "Bicicleta de Montaña",
+    brand: "Trek — Marlin 7",
+    desc: "29\", frenos hidráulicos Shimano, talla M. Poco uso. Incluye casco, luces y candado. Lista para rodar.",
+    price: 480,
+    sold: false,
+    color: "#7A9B6E",
+    label: "bicicleta de montaña Trek",
+    imageUrl: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=900&auto=format&fit=crop&q=80",
+  },
+  {
+    id: 3,
+    name: "Cafetera Espresso",
+    brand: "De'Longhi — Dedica",
+    desc: "Cafetera de 15 bares, compatible con cápsulas ESE y café molido. Incluye molinillo manual Hario.",
+    price: 120,
+    sold: true,
+    color: "#B0A090",
+    label: "cafetera espresso De'Longhi",
+  },
+  {
+    id: 4,
+    name: "Escritorio",
+    brand: "IKEA — Bekant",
+    desc: "160×80cm, tablero de chapa de roble, patas blancas. Cable management incluido. Sin arañazos.",
+    price: 180,
+    sold: false,
+    color: "#C4A882",
+    label: "escritorio Bekant 160cm",
+  },
+  {
+    id: 5,
+    name: "Lámpara de Pie",
+    brand: "HAY — Matin",
+    desc: "Pantalla de tela beige, pie metálico negro mate. Altura 150cm. Perfecta para lectura o rincón de trabajo.",
+    price: 95,
+    sold: false,
+    color: "#D4C9B0",
+    label: "lámpara de pie HAY Matin",
+  },
+  {
+    id: 6,
+    name: "Televisor 55\"",
+    brand: "Samsung — QLED Q70B",
+    desc: "4K, HDR10+, 120Hz. Incluye mando original y soporte de pared. Imagen excelente, sin píxeles muertos.",
+    price: 550,
+    sold: true,
+    color: "#606070",
+    label: "televisor Samsung 55 pulgadas",
+  },
+  {
+    id: 7,
+    name: "Estantería",
+    brand: "IKEA — Billy",
+    desc: "200×80×28cm, blanca. 5 estantes ajustables, puertas de cristal incluidas. Capacidad de carga: 30kg/estante.",
+    price: 90,
+    sold: false,
+    color: "#E0D8CC",
+    label: "estantería Billy blanca",
+  },
+  {
+    id: 8,
+    name: "Aire Acondicionado",
+    brand: "Daikin — Perfera 25",
+    desc: "Split inverter 2500W, clase A+++. Calor y frío. Instalado por técnico oficial. Con garantía hasta 2026.",
+    price: 620,
+    sold: false,
+    color: "#A8C4D8",
+    label: "aire acondicionado Daikin split",
+  },
+];
+
+/* ── SVG PLACEHOLDER ── */
+function ItemImage({ item, mini = false }) {
+  if (item.imageUrl) {
+    return (
+      <img
+        src={item.imageUrl}
+        alt={item.label}
+        style={{
+          width: '100%', height: '100%',
+          objectFit: 'contain',
+          objectPosition: 'center',
+          display: 'block',
+          background: 'transparent',
+          padding: mini ? '4px' : '1.5rem',
+        }}
+      />
+    );
+  }
+  const id = `stripe-${item.id}-${mini ? 'm' : 'f'}`;
+  return (
+    <svg className="img-placeholder" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id={id} patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+          <rect width="20" height="20" fill={item.color} opacity="0.35" />
+          <line x1="0" y1="0" x2="0" y2="20" stroke={item.color} strokeWidth="8" opacity="0.18" />
+        </pattern>
+      </defs>
+      <rect width="400" height="300" fill={`url(#${id})`} />
+      {!mini && (
+        <text
+          x="200" y="162"
+          textAnchor="middle"
+          fontFamily="monospace"
+          fontSize="11"
+          fill="#000"
+          opacity="0.4"
+          letterSpacing="0.5"
+        >
+          {item.label}
+        </text>
+      )}
+    </svg>
+  );
+}
+
+/* ── VENDIDO STAMP ── */
+function VendidoStamp({ mini = false }) {
+  return (
+    <div className="vendido-stamp">
+      {mini
+        ? <div className="thumb-vendido__label">VENDIDO</div>
+        : <div className="vendido-stamp__inner">VENDIDO</div>
+      }
+    </div>
+  );
+}
+
+/* ── MARQUEE ── */
+const HERO_WORDS = ["Me estoy mudando", "Vendo todo", "Precios sin regateo", "Solo recogida", "Barcelona", "Abril 2026", "Todo tiene que irse", "Sin intermediarios"];
+const ITEM_WORDS = ["Buen estado", "Solo recogida en mano", "Sin envío", "Precio fijo", "Primero en llegar", "Sin reservas"];
+
+function MarqueeStrip({ words, reverse = false, small = false }) {
+  const repeated = [...words, ...words, ...words, ...words];
+  return (
+    <div className={`marquee-strip${small ? ' marquee-strip--sm' : ''}`}>
+      <div className={`marquee-track${reverse ? ' marquee-track--reverse' : ''}`}>
+        {repeated.map((w, i) => (
+          <React.Fragment key={i}>
+            <span className="marquee-item">{w}</span>
+            <span className="marquee-sep">✦</span>
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── HERO SLIDE ── */
+function HeroSlide({ onNext, location }) {
+  return (
+    <div className="slide hero" data-screen-label="00 Hero">
+      <div className="hero__eyebrow">{location}</div>
+      <h1 className="hero__title">
+        Me estoy<br />
+        mudando<br />y <em>vendo</em><br />todo
+      </h1>
+      <p className="hero__subtitle">{ITEMS.filter(i => !i.sold).length} artículos disponibles · Precios sin regateo</p>
+      <div className="hero__marquees">
+        <MarqueeStrip words={HERO_WORDS} />
+        <MarqueeStrip words={ITEM_WORDS} reverse small />
+      </div>
+
+    </div>
+  );
+}
+
+/* ── ITEM SLIDE ── */
+function ItemSlide({ item, idx, total, onAddToCart, isInCart, showPrice }) {
+  return (
+    <div className="slide item-slide" data-screen-label={`0${idx + 1} ${item.name}`}>
+      <div className="item-marquee-wrap">
+        <MarqueeStrip words={[item.name, item.brand, `${item.price} €`, ...ITEM_WORDS]} reverse={idx % 2 === 0} small />
+      </div>
+      <div className="item-slide__image-panel">
+        <div className={`item-slide__image-frame${item.sold ? ' sold' : ''}`}>
+          <ItemImage item={item} />
+          {item.sold && <VendidoStamp />}
+        </div>
+      </div>
+      <div className="item-slide__content-panel">
+        <div className="item-slide__slide-num">
+          Artículo {String(idx + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+        </div>
+        <h2 className="item-slide__name">{item.name}</h2>
+        <div className="item-slide__brand">{item.brand}</div>
+        <p className="item-slide__desc">{item.desc}</p>
+      {showPrice && <div className="item-slide__price">{item.price} €</div>}
+        <button
+          className={`btn-cta${isInCart ? ' added' : ''}`}
+          disabled={item.sold}
+          onClick={() => onAddToCart(item)}
+        >
+          {item.sold ? '— Vendido' : isInCart ? '✓ En tu lista' : 'Me interesa'}
+          {!item.sold && !isInCart && (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 8h12M9 3l5 5-5 5" stroke="#000" strokeWidth="2" strokeLinecap="square"/>
+            </svg>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ── THUMBNAIL GRID ── */
+function ThumbnailGrid({ open, onClose, onNavigate, currentIndex }) {
+  const overlayRef = useRef(null);
+
+  useEffect(() => {
+    const el = overlayRef.current;
+    if (!el) return;
+    if (open) {
+      gsap.to(el, { y: '0%', duration: 0.5, ease: 'power3.out' });
+    } else {
+      gsap.to(el, { y: '100%', duration: 0.4, ease: 'power3.in' });
+    }
+  }, [open]);
+
+  return (
+    <div className="thumb-grid-overlay" ref={overlayRef} style={{ transform: 'translateY(100%)' }}>
+      <div className="thumb-grid-header">
+        <div className="thumb-grid-header__title">
+          Todos los artículos ({ITEMS.length})
+        </div>
+        <button className="thumb-grid-close" onClick={onClose} aria-label="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M2 2l14 14M16 2L2 16" stroke="#000" strokeWidth="2.5" strokeLinecap="square"/>
+          </svg>
+        </button>
+      </div>
+      <div className="thumb-grid-body">
+        <div className="thumb-grid">
+          {ITEMS.map((item, i) => (
+            <div
+              key={item.id}
+              className="thumb-card"
+              onClick={() => { onNavigate(i + 1); onClose(); }}
+            >
+              <div className={`thumb-card__img${item.sold ? ' sold' : ''}`}>
+                <ItemImage item={item} mini />
+                {item.sold && (
+                  <div className="thumb-vendido">
+                    <div className="thumb-vendido__label">VENDIDO</div>
+                  </div>
+                )}
+              </div>
+              <div className="thumb-card__label">
+                <div className="thumb-card__name">{item.name}</div>
+                <div className="thumb-card__price">{item.sold ? 'Vendido' : `${item.price} €`}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── CART DRAWER ── */
+function CartDrawer({ open, onClose, cart, onRemove }) {
+  const total = cart.reduce((s, i) => s + i.price, 0);
+
+  const makeWhatsApp = () => {
+    const lines = cart.map(i => `• ${i.name} — ${i.price} €`).join('%0A');
+    const msg = `Hola! Me interesan los siguientes artículos:%0A${lines}%0A%0ATotal: ${total} €`;
+    window.open(`https://wa.me/?text=${msg}`, '_blank');
+  };
+
+  return (
+    <div className={`cart-drawer${open ? ' open' : ''}`}>
+      <div className="cart-drawer__header">
+        <div className="cart-drawer__title">Tu lista ({cart.length})</div>
+        <button className="cart-drawer__close" onClick={onClose} aria-label="Cerrar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 2l12 12M14 2L2 14" stroke="#000" strokeWidth="2.5" strokeLinecap="square"/>
+          </svg>
+        </button>
+      </div>
+      <div className="cart-drawer__body">
+        {cart.length === 0 ? (
+          <div className="cart-empty">
+            <div className="cart-empty__icon">□</div>
+            <div className="cart-empty__text">Nada por aquí aún</div>
+          </div>
+        ) : (
+          cart.map(item => (
+            <div key={item.id} className="cart-item">
+              <div className="cart-item__thumb">
+                <ItemImage item={item} mini />
+              </div>
+              <div>
+                <div className="cart-item__name">{item.name}</div>
+                <div className="cart-item__price">{item.price} €</div>
+              </div>
+              <button className="cart-item__remove" onClick={() => onRemove(item.id)} aria-label="Quitar">✕</button>
+            </div>
+          ))
+        )}
+      </div>
+      {cart.length > 0 && (
+        <div className="cart-drawer__footer">
+          <div className="cart-total">
+            <span className="cart-total__label">Total</span>
+            <span className="cart-total__amount">{total} €</span>
+          </div>
+          <button className="btn-whatsapp" onClick={makeWhatsApp}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#000" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M11.997 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.979-1.412A9.953 9.953 0 0011.997 22C17.52 22 22 17.523 22 12S17.52 2 11.997 2zm.003 18.13a8.125 8.125 0 01-4.143-1.131l-.297-.177-3.077.872.885-3.003-.194-.308A8.13 8.13 0 113.87 12a8.13 8.13 0 018.13-8.13 8.13 8.13 0 018.13 8.13 8.13 8.13 0 01-8.13 8.13z"/>
+            </svg>
+            Contactar por WhatsApp
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── TWEAKS ── */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#AAFF00",
+  "showNavArrows": true,
+  "showPrice": true,
+  "heroLocation": "Barcelona · Abril 2026",
+  "transitionSpeed": 0.55
+}/*EDITMODE-END*/;
+
+/* ── MAIN APP ── */
+function App() {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // Apply accent color CSS var live
+  useEffect(() => {
+    document.documentElement.style.setProperty('--accent', tweaks.accentColor);
+    document.documentElement.style.setProperty('--shadow-lime', `6px 6px 0px ${tweaks.accentColor}`);
+  }, [tweaks.accentColor]);
+
+  // slides: 0 = hero, 1..N = items
+  const total = ITEMS.length;
+  const [current, setCurrent] = useState(0);
+  const [cart, setCart] = useState([]);
+  const [gridOpen, setGridOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const slidesRef = useRef([]);
+  const transitioning = useRef(false);
+
+  const navigate = useCallback((nextIdx) => {
+    if (transitioning.current) return;
+    if (nextIdx < 0 || nextIdx > total) return;
+    const dir = nextIdx > current ? -1 : 1;
+    transitioning.current = true;
+
+    const currentEl = slidesRef.current[current];
+    const nextEl = slidesRef.current[nextIdx];
+    if (!currentEl || !nextEl) {
+      setCurrent(nextIdx);
+      transitioning.current = false;
+      return;
+    }
+
+    gsap.set(nextEl, { x: `${-dir * 100}%`, zIndex: 2 });
+    gsap.set(currentEl, { zIndex: 1 });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.set(currentEl, { x: '100%', zIndex: 0 });
+        setCurrent(nextIdx);
+        transitioning.current = false;
+      }
+    });
+
+    const spd = tweaks.transitionSpeed;
+    tl.to(currentEl, { x: `${dir * 100}%`, duration: spd, ease: 'power3.inOut' }, 0)
+      .to(nextEl, { x: '0%', duration: spd, ease: 'power3.inOut' }, 0);
+  }, [current, total]);
+
+  // Position all slides initially
+  useEffect(() => {
+    slidesRef.current.forEach((el, i) => {
+      if (!el) return;
+      gsap.set(el, { x: i === 0 ? '0%' : '100%', zIndex: 0 });
+    });
+  }, []);
+
+  // Keyboard nav
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(current + 1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(current - 1);
+      if (e.key === 'Escape') { setGridOpen(false); setCartOpen(false); }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [navigate, current]);
+
+  // Touch swipe
+  useEffect(() => {
+    let startX = 0;
+    const onStart = (e) => { startX = (e.touches || e.changedTouches)[0].clientX; };
+    const onEnd = (e) => {
+      const dx = (e.changedTouches)[0].clientX - startX;
+      if (Math.abs(dx) > 50) navigate(dx < 0 ? current + 1 : current - 1);
+    };
+    window.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchend', onEnd, { passive: true });
+    return () => { window.removeEventListener('touchstart', onStart); window.removeEventListener('touchend', onEnd); };
+  }, [navigate, current]);
+
+  const addToCart = (item) => {
+    if (cart.find(c => c.id === item.id)) return;
+    setCart(prev => [...prev, item]);
+  };
+
+  const removeFromCart = (id) => setCart(prev => prev.filter(c => c.id !== id));
+
+  const allSlides = [null, ...ITEMS]; // index 0 = hero
+
+  return (
+    <>
+      <div className="stage">
+        {allSlides.map((item, i) => (
+          <div
+            key={i}
+            ref={el => slidesRef.current[i] = el}
+            style={{ position: 'absolute', inset: 0, willChange: 'transform' }}
+          >
+            {i === 0
+              ? <HeroSlide onNext={() => navigate(1)} location={tweaks.heroLocation} />
+              : <ItemSlide
+                  item={item}
+                  idx={i - 1}
+                  total={total}
+                  onAddToCart={addToCart}
+                  isInCart={!!cart.find(c => c.id === item.id)}
+                  showPrice={tweaks.showPrice}
+                />
+            }
+          </div>
+        ))}
+      </div>
+
+      {/* NAV ARROWS */}
+      <div className="nav-arrows">
+        <button
+          className={`nav-arrow${current === 0 || !tweaks.showNavArrows ? ' hidden' : ''}`}
+          onClick={() => navigate(current - 1)}
+          aria-label="Anterior"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M11 3L5 9l6 6" stroke="#000" strokeWidth="2.5" strokeLinecap="square"/>
+          </svg>
+        </button>
+        <button
+          className={`nav-arrow${current === total || !tweaks.showNavArrows ? ' hidden' : ''}`}
+          onClick={() => navigate(current + 1)}
+          aria-label="Siguiente"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7 3l6 6-6 6" stroke="#000" strokeWidth="2.5" strokeLinecap="square"/>
+          </svg>
+        </button>
+      </div>
+
+      {/* FLOATING BUTTONS */}
+      <div className="floating-btns">
+        <button className="fab" onClick={() => { setGridOpen(true); setCartOpen(false); }} aria-label="Ver todos">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="2" width="6" height="6" stroke="#000" strokeWidth="2"/>
+            <rect x="12" y="2" width="6" height="6" stroke="#000" strokeWidth="2"/>
+            <rect x="2" y="12" width="6" height="6" stroke="#000" strokeWidth="2"/>
+            <rect x="12" y="12" width="6" height="6" stroke="#000" strokeWidth="2"/>
+          </svg>
+        </button>
+        <button className="fab" onClick={() => { setCartOpen(true); setGridOpen(false); }} aria-label="Tu lista">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M2 4h2l2.5 9h9L18 7H6" stroke="#000" strokeWidth="2" strokeLinecap="square"/>
+            <circle cx="9" cy="17" r="1.5" fill="#000"/>
+            <circle cx="15" cy="17" r="1.5" fill="#000"/>
+          </svg>
+          {cart.length > 0 && <div className="fab__badge">{cart.length}</div>}
+        </button>
+      </div>
+
+      {/* THUMBNAIL GRID */}
+      <ThumbnailGrid
+        open={gridOpen}
+        onClose={() => setGridOpen(false)}
+        onNavigate={navigate}
+        currentIndex={current}
+      />
+
+      {/* CART DRAWER */}
+      <CartDrawer
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+        cart={cart}
+        onRemove={removeFromCart}
+      />
+
+      {/* TWEAKS PANEL */}
+      <TweaksPanel>
+        <TweakColor id="accentColor" label="Accent color" value={tweaks.accentColor} onChange={v => setTweak('accentColor', v)} />
+        <TweakToggle id="showNavArrows" label="Show nav arrows" value={tweaks.showNavArrows} onChange={v => setTweak('showNavArrows', v)} />
+        <TweakToggle id="showPrice" label="Show prices" value={tweaks.showPrice} onChange={v => setTweak('showPrice', v)} />
+        <TweakText id="heroLocation" label="Location / date line" value={tweaks.heroLocation} onChange={v => setTweak('heroLocation', v)} />
+        <TweakSlider id="transitionSpeed" label="Slide transition speed" value={tweaks.transitionSpeed} min={0.1} max={1.2} step={0.05} onChange={v => setTweak('transitionSpeed', v)} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
