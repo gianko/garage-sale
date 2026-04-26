@@ -37,6 +37,8 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
       <button
         class:list={["item-slide__cta", { "item-slide__cta--sold": item.sold }]}
         disabled={item.sold || undefined}
+        data-item-id={item.id}
+        data-sold={item.sold ? "true" : "false"}
       >
         {item.sold ? "— Vendido" : "Me interesa"}
       </button>
@@ -194,6 +196,10 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
     right: 0;
   }
 
+  .item-slide__cta--in-cart {
+    background: var(--bg) !important;
+  }
+
   @media (max-width: 700px) {
     .item-slide__grid {
       grid-template-columns: 1fr;
@@ -217,3 +223,36 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
     }
   }
 </style>
+
+<script>
+  import { getCart, addToCart, removeFromCart } from "../data/cart";
+
+  function syncBtn(btn: HTMLButtonElement) {
+    if (btn.dataset.sold === "true") return;
+    const id = btn.dataset.itemId!;
+    const inCart = getCart().includes(id);
+    btn.textContent = inCart ? "✓ En tu lista" : "Me interesa";
+    btn.classList.toggle("item-slide__cta--in-cart", inCart);
+  }
+
+  function syncAllBtns() {
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-item-id]")
+      .forEach(syncBtn);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>("[data-item-id]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.itemId!;
+      if (getCart().includes(id)) {
+        removeFromCart(id);
+      } else {
+        addToCart(id);
+      }
+    });
+  });
+
+  window.addEventListener("cart:updated", syncAllBtns);
+
+  syncAllBtns();
+</script>
