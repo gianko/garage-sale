@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { words, reverse = false, small = false } = Astro.props;
+// Start with 4 reps; client script clones more if content is too narrow
 const repeated = [...words, ...words, ...words, ...words];
 ---
 
@@ -90,3 +91,17 @@ const repeated = [...words, ...words, ...words, ...words];
     flex-shrink: 0;
   }
 </style>
+
+<script>
+  // For -50% loop to be seamless, track must be >= 2x container width.
+  // Clone content until that threshold is met.
+  document.querySelectorAll(".marquee-strip").forEach((strip) => {
+    const track = strip.querySelector(".marquee-track");
+    if (!track) return;
+    const needed = strip.clientWidth * 2;
+    const seed = track.innerHTML;
+    while (track.scrollWidth < needed) {
+      track.insertAdjacentHTML("beforeend", seed);
+    }
+  });
+</script>
