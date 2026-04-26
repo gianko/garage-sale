@@ -276,7 +276,8 @@
   import gsap from "gsap";
   import { getCart, removeFromCart } from "../data/cart";
   import itemsData from "../data/items.json";
-  import { WHATSAPP_NUMBER } from "../config";
+
+  const phone = new URLSearchParams(window.location.search).get("phone");
 
   type ItemEntry = { id: string; name: string; image: string; sold: boolean };
 
@@ -326,8 +327,10 @@
 
       const lines = cartItems.map((i) => `- ${i.name}`).join("\n");
       const message = `Hola! Vi tu venta y me interesan algunos artículos:\n${lines}\n¿Están disponibles?`;
-      whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      footer.classList.add("is-visible");
+      if (phone) {
+        whatsappLink.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        footer.classList.add("is-visible");
+      }
     }
   }
 

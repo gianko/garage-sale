@@ -1,18 +1,17 @@
 ---
 import MarqueeStrip from "./MarqueeStrip.astro";
-import { SALE_LOCATION, SALE_DATE } from "../config";
 import items from "../data/items.json";
 
 const availableCount = items.filter((i) => !i.sold).length;
-const eyebrow = `${SALE_LOCATION} · ${SALE_DATE}`;
+const eyebrow = "Dublín · Julio 2026";
 
 const heroWords = [
   "Me estoy mudando",
   "Vendo todo",
   "Precios insuperables",
   "Solo recogida",
-  SALE_LOCATION,
-  SALE_DATE,
+  "Dublín",
+  "Julio 2026",
   "Todo tiene que irse",
   "Sin intermediarios",
 ];
@@ -127,7 +126,7 @@ const itemWords = [
 <script>
   import gsap from "gsap";
 
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
   tl.from(".hero__eyebrow", { y: -14, autoAlpha: 0, duration: 0.6 })
     .from(
