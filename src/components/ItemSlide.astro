@@ -52,7 +52,7 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
 <style>
   .item-slide {
     position: relative;
-    height: 100vh;
+    height: 100dvh;
     background: var(--bg);
     overflow: hidden;
   }
@@ -213,9 +213,10 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
     .item-slide__content {
       border-left: none;
       border-top: var(--border);
-      padding: 1.25rem 1.5rem 1.5rem;
+      padding: 1.25rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
       gap: 0.75rem;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
 
     .item-slide__name {
@@ -237,11 +238,11 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
 
   function syncAllBtns() {
     document
-      .querySelectorAll<HTMLButtonElement>("[data-item-id]")
+      .querySelectorAll<HTMLButtonElement>(".item-slide__cta[data-item-id]")
       .forEach(syncBtn);
   }
 
-  document.querySelectorAll<HTMLButtonElement>("[data-item-id]").forEach((btn) => {
+  document.querySelectorAll<HTMLButtonElement>(".item-slide__cta[data-item-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.itemId!;
       if (getCart().includes(id)) {
