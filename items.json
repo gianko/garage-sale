@@ -3,7 +3,7 @@
     "id": "monitor-lg-4k",
     "name": "Monitor LG 4K",
     "brand": "LG 27UP650K-W",
-    "description": "27-inch UltraFine 4K UHD (3840×2160) IPS display with VESA DisplayHDR 400 and DCI-P3 95% color gamut — ideal for design, editing, or everyday work. Comes with HDMI, DisplayPort, and a fully adjustable stand (tilt, height, pivot). White finish, excellent condition.",
+    "description": "Monitor IPS de 27 pulgadas con resolución 4K UHD (3840×2160), DisplayHDR 400 y gama de color DCI-P3 95% — ideal para diseño, edición y trabajo diario. Incluye HDMI, DisplayPort y soporte ajustable en altura, inclinación y rotación. Color blanco, excelente estado.",
     "image": "/images/monitor-lg-4k.png",
     "sold": false
   },
@@ -11,7 +11,7 @@
     "id": "cornetas-kurbis",
     "name": "Cornetas Thonet-Vander",
     "brand": "Thonet-Vander Kurbis Cinema",
-    "description": "2.0 desktop speaker system with 72W RMS output and distinctive 5.25\" aramid fiber woofers in a solid wood cabinet. Connects via Bluetooth 5.0, aux, RCA, or optical — versatile for any setup. Full, rich sound with separate bass and treble controls.",
+    "description": "Sistema de parlantes 2.0 con 72W RMS y woofers de 5.25\" de fibra de aramida en caja de madera maciza. Conectividad por Bluetooth 5.0, auxiliar, RCA u óptico — se adapta a cualquier setup. Sonido rico y potente con controles independientes de graves y agudos.",
     "image": "/images/cornetas-kurbis.png",
     "sold": false
   },
@@ -19,7 +19,7 @@
     "id": "ps5",
     "name": "PlayStation 5",
     "brand": "Sony PlayStation 5",
-    "description": "Sony's flagship gaming console with ultra-fast SSD, ray tracing, and 4K gaming at up to 120fps. The DualSense controller's haptic feedback and adaptive triggers make gameplay feel more immersive than ever. Ready to play.",
+    "description": "La consola insignia de Sony con SSD ultrarrápido, ray tracing y gaming en 4K a hasta 120fps. El control DualSense con retroalimentación háptica y gatillos adaptativos hace cada juego más inmersivo. Lista para jugar.",
     "image": "/images/ps5.png",
     "sold": false
   },
@@ -27,7 +27,7 @@
     "id": "teli-sony-49",
     "name": "Televisor Sony 49\"",
     "brand": "Sony KD-49X725E",
-    "description": "49-inch 4K UHD Smart TV with HDR and Sony's X-Reality Pro upscaling processor for sharp, vivid images on every source. Built-in Wi-Fi with access to all major streaming apps. Solid performer for movies, shows, and gaming.",
+    "description": "Televisor Smart 4K UHD de 49 pulgadas con HDR y procesador X-Reality Pro de Sony para imágenes nítidas y vibrantes en cualquier fuente. Wi-Fi integrado con acceso a todas las plataformas de streaming. Excelente para películas, series y juegos.",
     "image": "/images/teli-sony-49.png",
     "sold": false
   },
@@ -35,7 +35,7 @@
     "id": "espumador-smarttek",
     "name": "Espumador de Leche",
     "brand": "Smart Tek MF850",
-    "description": "Electric milk frother that prepares hot and cold foam in under 90 seconds. Non-stick interior, 360° rotating base, and 240ml heating capacity — perfect for lattes, cappuccinos, and hot chocolate. Color vainilla.",
+    "description": "Espumero eléctrico que prepara espuma fría o caliente en menos de 90 segundos. Interior antiadherente, base giratoria 360° y capacidad de 240ml para calentar — perfecto para lattes, cappuccinos y chocolate caliente. Color vainilla.",
     "image": "/images/espumador-smarttek.png",
     "sold": false
   },
@@ -43,7 +43,7 @@
     "id": "air-fryer-overtech",
     "name": "Air Fryer",
     "brand": "Overtech OV-106",
-    "description": "5-liter digital air fryer with 1600W and 360° hot air circulation for crispy results with little to no oil. Digital controls with a 60-minute timer and adjustable temperature from 80°C to 200°C. Dishwasher-safe basket.",
+    "description": "Freidora de aire digital de 5 litros con 1600W y circulación de aire 360° para resultados crujientes con poco o nada de aceite. Controles digitales con temporizador de hasta 60 minutos y temperatura ajustable entre 80°C y 200°C. Cesta apta para lavavajillas.",
     "image": "/images/air-fryer-overtech.png",
     "sold": false
   },
@@ -51,7 +51,7 @@
     "id": "filtro-agua-psa",
     "name": "Filtro de Agua",
     "brand": "PSA Senior 4",
-    "description": "Under-sink water purifier with granular activated carbon — removes chlorine, lead, iron, and trihalomethanes from tap water. 36-month filter lifespan and 100 L/h flow rate. Compact, low-maintenance, and highly effective.",
+    "description": "Purificador de agua con filtración por carbón activado granular — elimina cloro, plomo, hierro y trihalometanos del agua de la canilla. Vida útil del filtro de 36 meses y caudal de 100 L/h. Compacto, de bajo mantenimiento y muy eficaz.",
     "image": "/images/filtro-agua-psa.png",
     "sold": false
   },
@@ -59,7 +59,7 @@
     "id": "wifi-deco-x15",
     "name": "Sistema WiFi 6 Mesh",
     "brand": "TP-Link Deco X15 (2-pack)",
-    "description": "WiFi 6 mesh system covering up to 3,900 sq ft with speeds up to 1,500 Mbps — replaces your router and extender in one clean setup. Two Gigabit ports per unit with Ethernet backhaul support and management via app. Supports up to 120 devices.",
+    "description": "Sistema mesh WiFi 6 que cubre hasta 360m² con velocidades de hasta 1.500 Mbps — reemplaza el router y el extensor en un solo equipo. Dos puertos Gigabit por unidad con soporte para backhaul por cable y gestión desde la app. Soporta hasta 120 dispositivos.",
     "image": "/images/wifi-deco-x15.png",
     "sold": false
   },
@@ -67,7 +67,7 @@
     "id": "cama",
     "name": "Cama",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/cama.png",
     "sold": false
   },
@@ -75,7 +75,7 @@
     "id": "colchon",
     "name": "Colchón",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/colchon.png",
     "sold": false
   },
@@ -83,7 +83,7 @@
     "id": "interface-scarlett",
     "name": "Interfaz de Audio",
     "brand": "Focusrite Scarlett 4i4 3rd Gen",
-    "description": "4-in/4-out USB-C audio interface with 24-bit/192kHz resolution and two studio-grade mic preamps with switchable Air mode. Includes MIDI I/O and comes bundled with Ableton Live Lite, Pro Tools Intro, and more. The go-to interface for home studio recording.",
+    "description": "Interfaz de audio USB-C 4 entradas/4 salidas con resolución 24-bit/192kHz y dos preamplificadores de micrófono con modo Air. Incluye entradas MIDI y viene con Ableton Live Lite, Pro Tools Intro y más. La interfaz de referencia para grabación en home studio.",
     "image": "/images/interface-scarlett.png",
     "sold": false
   },
@@ -91,7 +91,7 @@
     "id": "aspiradora-shark",
     "name": "Aspiradora Shark HydroVac",
     "brand": "Shark HydroVac MessMaster WD261",
-    "description": "Cordless 3-in-1 system that vacuums, mops, and self-cleans in one pass — no bags, no mess. Up to 35 minutes of runtime with powerful suction for hard floors, tile, and area rugs. Rose gold finish, like new.",
+    "description": "Sistema inalámbrico 3 en 1 que aspira, trapea y se autolimpia en una sola pasada — sin bolsa, sin líos. Hasta 35 minutos de autonomía con potente succión para pisos duros, cerámico y alfombras. Color rose gold, como nueva.",
     "image": "/images/aspiradora-shark.png",
     "sold": false
   },
@@ -99,7 +99,7 @@
     "id": "sofa",
     "name": "Sofá",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/sofa.png",
     "sold": false
   },
@@ -107,7 +107,7 @@
     "id": "mesa-televisor",
     "name": "Mesa de Televisor",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/mesa-televisor.png",
     "sold": false
   },
@@ -115,7 +115,7 @@
     "id": "escritorio",
     "name": "Escritorio",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/escritorio.png",
     "sold": false
   },
@@ -123,15 +123,15 @@
     "id": "estante",
     "name": "Estante",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/estante.png",
     "sold": false
   },
   {
     "id": "ukulele",
     "name": "Ukulele",
-    "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "brand": "Bamboo",
+    "description": "Ukulele concert de la marca Bamboo — tamaño intermedio con sonido cálido y melódico, más cómodo de tocar que el soprano. Ideal tanto para principiantes como para músicos con experiencia. Liviano y listo para llevar a cualquier lado.",
     "image": "/images/ukulele.png",
     "sold": false
   },
@@ -139,7 +139,7 @@
     "id": "mesita-expandible",
     "name": "Mesita Expandible",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/mesita-expandible.png",
     "sold": false
   },
@@ -147,7 +147,7 @@
     "id": "corneta-wifi-sony",
     "name": "Corneta WiFi Sony",
     "brand": "Sony SRS-HG1",
-    "description": "Hi-Res portable wireless speaker with Sony LDAC for lossless Bluetooth audio and built-in Wi-Fi with Google Cast and Spotify Connect. Dual drivers, EXTRA BASS mode, and up to 12 hours of battery life. Charcoal black.",
+    "description": "Parlante portátil Hi-Res con tecnología LDAC de Sony para audio Bluetooth sin pérdidas y Wi-Fi integrado con Google Cast y Spotify Connect. Doble driver, modo EXTRA BASS y hasta 12 horas de batería. Color negro carbón.",
     "image": "/images/corneta-wifi-sony.png",
     "sold": false
   },
@@ -155,15 +155,15 @@
     "id": "canil-plegable",
     "name": "Canil Plegable",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "TODO: agregar descripción cuando la foto esté disponible.",
     "image": "/images/canil-plegable.png",
     "sold": false
   },
   {
     "id": "rampa",
-    "name": "Rampa 90cm",
+    "name": "Rampa para Perro",
     "brand": "",
-    "description": "TODO: add description when photo is available.",
+    "description": "Rampa de 90cm para que tu perro suba y baje de muebles sin saltar. Resistente, liviana y fácil de posicionar. Ideal para perros pequeños y medianos.",
     "image": "/images/rampa.png",
     "sold": false
   }
