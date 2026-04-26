@@ -1,0 +1,92 @@
+---
+interface Props {
+  words: string[];
+  reverse?: boolean;
+  small?: boolean;
+}
+
+const { words, reverse = false, small = false } = Astro.props;
+const repeated = [...words, ...words, ...words, ...words];
+---
+
+<div class:list={["marquee-strip", { "marquee-strip--sm": small }]}>
+  <div class:list={["marquee-track", { "marquee-track--reverse": reverse }]}>
+    {repeated.map((word) => (
+      <>
+        <span class="marquee-item">{word}</span>
+        <span class="marquee-sep">✦</span>
+      </>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee-strip {
+    width: 100%;
+    overflow: hidden;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    background: var(--accent);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 48px;
+  }
+
+  .marquee-strip--sm {
+    height: 36px;
+    background: var(--black);
+  }
+
+  .marquee-strip--sm .marquee-track {
+    animation-duration: 18s;
+  }
+
+  .marquee-strip--sm .marquee-item {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--bg);
+  }
+
+  .marquee-strip--sm .marquee-sep {
+    color: var(--accent);
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    align-items: center;
+    animation: marquee-scroll 22s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-track--reverse {
+    animation-direction: reverse;
+    animation-duration: 26s;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    padding: 0 0.5rem;
+    white-space: nowrap;
+  }
+
+  .marquee-sep {
+    font-size: 18px;
+    color: var(--black);
+    opacity: 0.5;
+    padding: 0 0.75rem;
+    flex-shrink: 0;
+  }
+</style>
