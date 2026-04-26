@@ -1,0 +1,170 @@
+[
+  {
+    "id": "monitor-lg-4k",
+    "name": "Monitor LG 4K",
+    "brand": "LG 27UP650K-W",
+    "description": "27-inch UltraFine 4K UHD (3840×2160) IPS display with VESA DisplayHDR 400 and DCI-P3 95% color gamut — ideal for design, editing, or everyday work. Comes with HDMI, DisplayPort, and a fully adjustable stand (tilt, height, pivot). White finish, excellent condition.",
+    "image": "/images/monitor-lg-4k.png",
+    "sold": false
+  },
+  {
+    "id": "cornetas-kurbis",
+    "name": "Cornetas Thonet-Vander",
+    "brand": "Thonet-Vander Kurbis Cinema",
+    "description": "2.0 desktop speaker system with 72W RMS output and distinctive 5.25\" aramid fiber woofers in a solid wood cabinet. Connects via Bluetooth 5.0, aux, RCA, or optical — versatile for any setup. Full, rich sound with separate bass and treble controls.",
+    "image": "/images/cornetas-kurbis.png",
+    "sold": false
+  },
+  {
+    "id": "ps5",
+    "name": "PlayStation 5",
+    "brand": "Sony PlayStation 5",
+    "description": "Sony's flagship gaming console with ultra-fast SSD, ray tracing, and 4K gaming at up to 120fps. The DualSense controller's haptic feedback and adaptive triggers make gameplay feel more immersive than ever. Ready to play.",
+    "image": "/images/ps5.png",
+    "sold": false
+  },
+  {
+    "id": "teli-sony-49",
+    "name": "Televisor Sony 49\"",
+    "brand": "Sony KD-49X725E",
+    "description": "49-inch 4K UHD Smart TV with HDR and Sony's X-Reality Pro upscaling processor for sharp, vivid images on every source. Built-in Wi-Fi with access to all major streaming apps. Solid performer for movies, shows, and gaming.",
+    "image": "/images/teli-sony-49.png",
+    "sold": false
+  },
+  {
+    "id": "espumador-smarttek",
+    "name": "Espumador de Leche",
+    "brand": "Smart Tek MF850",
+    "description": "Electric milk frother that prepares hot and cold foam in under 90 seconds. Non-stick interior, 360° rotating base, and 240ml heating capacity — perfect for lattes, cappuccinos, and hot chocolate. Color vainilla.",
+    "image": "/images/espumador-smarttek.png",
+    "sold": false
+  },
+  {
+    "id": "air-fryer-overtech",
+    "name": "Air Fryer",
+    "brand": "Overtech OV-106",
+    "description": "5-liter digital air fryer with 1600W and 360° hot air circulation for crispy results with little to no oil. Digital controls with a 60-minute timer and adjustable temperature from 80°C to 200°C. Dishwasher-safe basket.",
+    "image": "/images/air-fryer-overtech.png",
+    "sold": false
+  },
+  {
+    "id": "filtro-agua-psa",
+    "name": "Filtro de Agua",
+    "brand": "PSA Senior 4",
+    "description": "Under-sink water purifier with granular activated carbon — removes chlorine, lead, iron, and trihalomethanes from tap water. 36-month filter lifespan and 100 L/h flow rate. Compact, low-maintenance, and highly effective.",
+    "image": "/images/filtro-agua-psa.png",
+    "sold": false
+  },
+  {
+    "id": "wifi-deco-x15",
+    "name": "Sistema WiFi 6 Mesh",
+    "brand": "TP-Link Deco X15 (2-pack)",
+    "description": "WiFi 6 mesh system covering up to 3,900 sq ft with speeds up to 1,500 Mbps — replaces your router and extender in one clean setup. Two Gigabit ports per unit with Ethernet backhaul support and management via app. Supports up to 120 devices.",
+    "image": "/images/wifi-deco-x15.png",
+    "sold": false
+  },
+  {
+    "id": "cama",
+    "name": "Cama",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/cama.png",
+    "sold": false
+  },
+  {
+    "id": "colchon",
+    "name": "Colchón",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/colchon.png",
+    "sold": false
+  },
+  {
+    "id": "interface-scarlett",
+    "name": "Interfaz de Audio",
+    "brand": "Focusrite Scarlett 4i4 3rd Gen",
+    "description": "4-in/4-out USB-C audio interface with 24-bit/192kHz resolution and two studio-grade mic preamps with switchable Air mode. Includes MIDI I/O and comes bundled with Ableton Live Lite, Pro Tools Intro, and more. The go-to interface for home studio recording.",
+    "image": "/images/interface-scarlett.png",
+    "sold": false
+  },
+  {
+    "id": "aspiradora-shark",
+    "name": "Aspiradora Shark HydroVac",
+    "brand": "Shark HydroVac MessMaster WD261",
+    "description": "Cordless 3-in-1 system that vacuums, mops, and self-cleans in one pass — no bags, no mess. Up to 35 minutes of runtime with powerful suction for hard floors, tile, and area rugs. Rose gold finish, like new.",
+    "image": "/images/aspiradora-shark.png",
+    "sold": false
+  },
+  {
+    "id": "sofa",
+    "name": "Sofá",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/sofa.png",
+    "sold": false
+  },
+  {
+    "id": "mesa-televisor",
+    "name": "Mesa de Televisor",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/mesa-televisor.png",
+    "sold": false
+  },
+  {
+    "id": "escritorio",
+    "name": "Escritorio",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/escritorio.png",
+    "sold": false
+  },
+  {
+    "id": "estante",
+    "name": "Estante",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/estante.png",
+    "sold": false
+  },
+  {
+    "id": "ukulele",
+    "name": "Ukulele",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/ukulele.png",
+    "sold": false
+  },
+  {
+    "id": "mesita-expandible",
+    "name": "Mesita Expandible",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/mesita-expandible.png",
+    "sold": false
+  },
+  {
+    "id": "corneta-wifi-sony",
+    "name": "Corneta WiFi Sony",
+    "brand": "Sony SRS-HG1",
+    "description": "Hi-Res portable wireless speaker with Sony LDAC for lossless Bluetooth audio and built-in Wi-Fi with Google Cast and Spotify Connect. Dual drivers, EXTRA BASS mode, and up to 12 hours of battery life. Charcoal black.",
+    "image": "/images/corneta-wifi-sony.png",
+    "sold": false
+  },
+  {
+    "id": "canil-plegable",
+    "name": "Canil Plegable",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/canil-plegable.png",
+    "sold": false
+  },
+  {
+    "id": "rampa",
+    "name": "Rampa 90cm",
+    "brand": "",
+    "description": "TODO: add description when photo is available.",
+    "image": "/images/rampa.png",
+    "sold": false
+  }
+]
