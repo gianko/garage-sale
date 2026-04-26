@@ -64,15 +64,7 @@
     "sold": false
   },
   {
-    "id": "cama",
-    "name": "Cama",
-    "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
-    "image": "/images/cama.png",
-    "sold": false
-  },
-  {
-    "id": "colchon",
+    "id": "colchon & cama",
     "name": "Colchón Simmons SpaTherapy",
     "brand": "Simmons",
     "description": "Colchón King 200×180cm de espuma de alta densidad con capas de Evolution Gel que disipan el calor y mantienen la temperatura ideal. Tapizado con tecnología Allergic Care (antiácaros y antibacterias) y tratamiento de aromaterapia. Sistema Non-Flip®, altura 27cm. Excelente estado.",
@@ -99,7 +91,7 @@
     "id": "sofa",
     "name": "Sofá",
     "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "description": "Sofá de dos cuerpos tapizado en tela color gris/beige con cojines incluidos. Diseño moderno de líneas rectas, cómodo y en buen estado general.",
     "image": "/images/sofa.png",
     "sold": false
   },
@@ -107,7 +99,7 @@
     "id": "mesa-televisor",
     "name": "Mesa de Televisor",
     "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "description": "Mueble de TV estilo industrial con superficie superior de madera oscura, estante intermedio abierto y dos cajones inferiores con tiradores metálicos. Estructura de caño de acero pintado negro con ruedas para fácil desplazamiento. Muy buen estado.",
     "image": "/images/mesa-televisor.png",
     "sold": false
   },
@@ -115,7 +107,7 @@
     "id": "escritorio",
     "name": "Escritorio",
     "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "description": "Escritorio de madera maciza con acabado oscuro sobre patas hairpin de metal negro — diseño industrial moderno con carácter. El tablero incluye una ranura central con bloque organizador integrado, ideal para cables o accesorios de escritorio. Amplia superficie de trabajo.",
     "image": "/images/escritorio.png",
     "sold": false
   },
@@ -123,7 +115,7 @@
     "id": "estante",
     "name": "Estante",
     "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "description": "Librería de diseño industrial con tablillas de madera oscura y estructura de metal negro. Distribución asimétrica de estantes a distintas alturas — perfecta para libros, plantas y decoración con estilo. Alta, robusta y en muy buen estado.",
     "image": "/images/estante.png",
     "sold": false
   },
@@ -139,7 +131,7 @@
     "id": "mesita-expandible",
     "name": "Mesita Expandible",
     "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "description": "Mesita auxiliar de madera con acabado negro y patas en ángulo — diseño minimalista y compacto. Superficie expandible que se adapta a distintos usos: mesa de noche, mesa lateral o apoyo para laptop. Muy buen estado.",
     "image": "/images/mesita-expandible.png",
     "sold": false
   },
@@ -154,9 +146,17 @@
   {
     "id": "canil-plegable",
     "name": "Canil Plegable",
-    "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "brand": "(perro para escala, no incluido)",
+    "description": "Canil de alambre plegable con dos puertas (frontal y lateral) y bandeja removible de fácil limpieza. Estructura de metal resistente, fácil de armar y guardar. Tamaño mediano, ideal para perros pequeños y medianos.",
     "image": "/images/canil-plegable.png",
+    "sold": false
+  },
+  {
+    "id": "xenyx-q802-usb",
+    "name": "Mixer Behringer Xenyx Q802",
+    "brand": "Behringer Xenyx Q802 USB",
+    "description": "Mezcladora analógica compacta de 8 entradas con interfaz USB integrada — conecta micrófonos, instrumentos y monitores, y graba directo al computador sin interfaz adicional. Incluye preamplificadores XENYX, compresor de un knob y módulo de efectos con 16 presets. Perfecta para streaming, podcasting o home studio.",
+    "image": "/images/xenyx-q802-usb.png",
     "sold": false
   },
   {

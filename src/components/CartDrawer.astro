@@ -273,6 +273,7 @@
 </style>
 
 <script>
+  import gsap from "gsap";
   import { getCart, removeFromCart } from "../data/cart";
   import itemsData from "../data/items.json";
   import { WHATSAPP_NUMBER } from "../config";
@@ -348,8 +349,23 @@
 
   body.addEventListener("click", (e) => {
     const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-remove-id]");
-    if (!btn) return;
-    removeFromCart(btn.dataset.removeId!);
+    if (!btn || btn.dataset.animating) return;
+
+    const id = btn.dataset.removeId!;
+    const item = btn.closest<HTMLElement>(".cart-item");
+
+    if (!item) {
+      removeFromCart(id);
+      return;
+    }
+
+    btn.dataset.animating = "true";
+    gsap.set(item, { overflow: "hidden" });
+
+    gsap
+      .timeline({ onComplete: () => removeFromCart(id) })
+      .to(item, { x: 52, opacity: 0, duration: 0.2, ease: "power2.in" })
+      .to(item, { height: 0, duration: 0.2, ease: "power2.inOut" });
   });
 
   window.addEventListener("cart:updated", () => updateDrawer());

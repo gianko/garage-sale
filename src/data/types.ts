@@ -5,5 +5,4 @@ export interface Item {
   description: string;
   image: string;
   sold: boolean;
-  price?: number;
 }

@@ -22,6 +22,3 @@ export function removeFromCart(id: string): void {
   setCart(getCart().filter((x) => x !== id));
 }
 
-export function isInCart(id: string): boolean {
-  return getCart().includes(id);
-}

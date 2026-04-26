@@ -19,7 +19,7 @@
     "id": "ps5",
     "name": "PlayStation 5",
     "brand": "Sony PlayStation 5",
-    "description": "La consola insignia de Sony con SSD ultrarrápido, ray tracing y gaming en 4K a hasta 120fps. El control DualSense con retroalimentación háptica y gatillos adaptativos hace cada juego más inmersivo. Lista para jugar.",
+    "description": "La consola insignia de Sony con SSD ultrarrápido, ray tracing y gaming en 4K a hasta 120fps. El control DualSense con retroalimentación háptica y gatillos adaptativos hace cada juego más inmersivo. Lista para jugar. (incluye 3 controles)",
     "image": "/images/ps5.png",
     "sold": false
   },
@@ -29,7 +29,7 @@
     "brand": "Sony KD-49X725E",
     "description": "Televisor Smart 4K UHD de 49 pulgadas con HDR y procesador X-Reality Pro de Sony para imágenes nítidas y vibrantes en cualquier fuente. Wi-Fi integrado con acceso a todas las plataformas de streaming. Excelente para películas, series y juegos.",
     "image": "/images/teli-sony-49.png",
-    "sold": false
+    "sold": true
   },
   {
     "id": "espumador-smarttek",
@@ -91,7 +91,7 @@
     "id": "sofa",
     "name": "Sofá",
     "brand": "",
-    "description": "Sofá de dos cuerpos tapizado en tela color gris/beige con cojines incluidos. Diseño moderno de líneas rectas, cómodo y en buen estado general.",
+    "description": "Sofá de dos cuerpos tapizado en tela color gris/beige con cojines incluidos. Diseño moderno de líneas rectas, cómodo y en buen estado general (ponele).",
     "image": "/images/sofa.png",
     "sold": false
   },
@@ -146,7 +146,7 @@
   {
     "id": "canil-plegable",
     "name": "Canil Plegable",
-    "brand": "",
+    "brand": "(perro para escala, no incluido)",
     "description": "Canil de alambre plegable con dos puertas (frontal y lateral) y bandeja removible de fácil limpieza. Estructura de metal resistente, fácil de armar y guardar. Tamaño mediano, ideal para perros pequeños y medianos.",
     "image": "/images/canil-plegable.png",
     "sold": false

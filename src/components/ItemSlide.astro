@@ -227,7 +227,46 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
 </style>
 
 <script>
+  import gsap from "gsap";
   import { getCart, addToCart, removeFromCart } from "../data/cart";
+
+  function flyToCart(btn: HTMLButtonElement) {
+    const frame = btn.closest(".item-slide")?.querySelector<HTMLElement>(".item-slide__frame");
+    const fab = document.getElementById("cart-fab");
+    if (!frame || !fab) return;
+
+    const frameRect = frame.getBoundingClientRect();
+    const fabRect = fab.getBoundingClientRect();
+
+    const clone = frame.cloneNode(true) as HTMLElement;
+    clone.querySelector(".item-slide__vendido")?.remove();
+    Object.assign(clone.style, {
+      position: "fixed",
+      top: `${frameRect.top}px`,
+      left: `${frameRect.left}px`,
+      width: `${frameRect.width}px`,
+      height: `${frameRect.height}px`,
+      margin: "0",
+      zIndex: "9999",
+      pointerEvents: "none",
+      transformOrigin: "center center",
+    });
+    document.body.appendChild(clone);
+
+    const endX = fabRect.left + fabRect.width / 2 - (frameRect.left + frameRect.width / 2);
+    const endY = fabRect.top + fabRect.height / 2 - (frameRect.top + frameRect.height / 2);
+    const dipY = 180; // drop below start before swooping up to FAB
+
+    gsap
+      .timeline({
+        onComplete: () => {
+          clone.remove();
+          gsap.fromTo(fab, { scale: 1.35 }, { scale: 1, duration: 0.45, ease: "elastic.out(1.2,0.5)" });
+        },
+      })
+      .to(clone, { duration: 0.38, x: endX * 0.55, y: dipY, scale: 0.65, ease: "power2.in" })
+      .to(clone, { duration: 0.45, x: endX, y: endY, scale: 0.08, opacity: 0.4, ease: "power2.out" });
+  }
 
   function syncBtn(btn: HTMLButtonElement) {
     if (btn.dataset.sold === "true") return;
@@ -249,6 +288,7 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
       if (getCart().includes(id)) {
         removeFromCart(id);
       } else {
+        flyToCart(btn);
         addToCart(id);
       }
     });
