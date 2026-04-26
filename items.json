@@ -73,9 +73,9 @@
   },
   {
     "id": "colchon",
-    "name": "Colchón",
-    "brand": "",
-    "description": "TODO: agregar descripción cuando la foto esté disponible.",
+    "name": "Colchón Simmons SpaTherapy",
+    "brand": "Simmons",
+    "description": "Colchón King 200×180cm de espuma de alta densidad con capas de Evolution Gel que disipan el calor y mantienen la temperatura ideal. Tapizado con tecnología Allergic Care (antiácaros y antibacterias) y tratamiento de aromaterapia. Sistema Non-Flip®, altura 27cm. Excelente estado.",
     "image": "/images/colchon.png",
     "sold": false
   },
