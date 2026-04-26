@@ -1,0 +1,219 @@
+---
+import MarqueeStrip from "./MarqueeStrip.astro";
+import type { Item } from "../data/types";
+
+interface Props {
+  item: Item;
+  index: number;
+  total: number;
+}
+
+const { item, index, total } = Astro.props;
+
+const counter = `Artículo ${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+const marqueeWords = [item.name, item.brand].filter(Boolean) as string[];
+const reverse = index % 2 !== 0;
+const rawImageSrc = item.image.replace("/images/", "/raw-images/");
+---
+
+<section class="item-slide">
+  <div class="item-slide__grid">
+    <div class="item-slide__image-panel">
+      <div class:list={["item-slide__frame", { "item-slide__frame--sold": item.sold }]}>
+        <img
+          src={item.image}
+          alt={item.name}
+          class="item-slide__img"
+          onerror={`this.onerror=null;this.src='${rawImageSrc}'`}
+        />
+        {item.sold && <div class="item-slide__vendido">VENDIDO</div>}
+      </div>
+    </div>
+    <div class="item-slide__content">
+      <p class="item-slide__counter">{counter}</p>
+      <h2 class="item-slide__name">{item.name}</h2>
+      {item.brand && <p class="item-slide__brand">{item.brand}</p>}
+      <p class="item-slide__desc">{item.description}</p>
+      <button
+        class:list={["item-slide__cta", { "item-slide__cta--sold": item.sold }]}
+        disabled={item.sold || undefined}
+      >
+        {item.sold ? "— Vendido" : "Me interesa"}
+      </button>
+    </div>
+  </div>
+  <div class="item-slide__marquee">
+    <MarqueeStrip words={marqueeWords} reverse={reverse} small />
+  </div>
+</section>
+
+<style>
+  .item-slide {
+    position: relative;
+    height: 100vh;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .item-slide__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100% - 36px);
+  }
+
+  .item-slide__image-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 5rem);
+  }
+
+  .item-slide__frame {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 4 / 3;
+    background: #e8e3da;
+    border: var(--border);
+    box-shadow: var(--shadow-lime);
+  }
+
+  .item-slide__frame--sold {
+    filter: grayscale(0.7) brightness(0.85);
+  }
+
+  .item-slide__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1.5rem;
+    display: block;
+  }
+
+  .item-slide__vendido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-weight: 900;
+    color: white;
+    background: #ff3333;
+    border: var(--border);
+    box-shadow: 4px 4px 0px #000;
+    pointer-events: none;
+    padding: 0.1em 0.4em;
+    white-space: nowrap;
+  }
+
+  .item-slide__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: clamp(2rem, 5vw, 5rem);
+    border-left: var(--border);
+    overflow: hidden;
+  }
+
+  .item-slide__counter {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.35;
+  }
+
+  .item-slide__name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 5.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  .item-slide__brand {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1.2vw, 14px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+  }
+
+  .item-slide__desc {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.3vw, 16px);
+    font-weight: 400;
+    line-height: 1.65;
+    opacity: 0.75;
+    max-width: 42ch;
+  }
+
+  .item-slide__cta {
+    display: inline-block;
+    width: fit-content;
+    background: var(--accent);
+    border: var(--border);
+    box-shadow: 6px 6px 0px #000;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition:
+      transform 0.1s,
+      box-shadow 0.1s;
+  }
+
+  .item-slide__cta:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #000;
+  }
+
+  .item-slide__cta:active:not(:disabled) {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px #000;
+  }
+
+  .item-slide__cta--sold {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #ccc;
+  }
+
+  .item-slide__marquee {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @media (max-width: 700px) {
+    .item-slide__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 45% 55%;
+    }
+
+    .item-slide__image-panel {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .item-slide__content {
+      border-left: none;
+      border-top: var(--border);
+      padding: 1.25rem 1.5rem 1.5rem;
+      gap: 0.75rem;
+      overflow-y: auto;
+    }
+
+    .item-slide__name {
+      font-size: clamp(1.75rem, 6vw, 3rem);
+    }
+  }
+</style>

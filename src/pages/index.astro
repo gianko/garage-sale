@@ -1,8 +1,98 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSlide from "../components/HeroSlide.astro";
+import ItemSlide from "../components/ItemSlide.astro";
+import items from "../data/items.json";
 ---
 
 <BaseLayout>
-  <HeroSlide />
+  <div id="slides-wrapper">
+    <div id="slides-container">
+      <HeroSlide />
+      {
+        items.map((item, i) => (
+          <ItemSlide item={item} index={i} total={items.length} />
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>
+
+<style is:global>
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+</style>
+
+<style>
+  #slides-wrapper {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #slides-container {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  const container = document.getElementById("slides-container") as HTMLElement;
+  const slides = Array.from(container.children) as HTMLElement[];
+  const total = slides.length;
+  let current = 0;
+  let locked = false;
+
+  function goTo(index: number) {
+    if (locked || index < 0 || index >= total) return;
+    locked = true;
+    current = index;
+    const offset = -slides[index].offsetTop;
+    gsap.to(container, {
+      y: offset,
+      duration: 0.7,
+      ease: "power3.inOut",
+      onComplete: () => {
+        locked = false;
+      },
+    });
+  }
+
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      if (e.deltaY > 0) goTo(current + 1);
+      else goTo(current - 1);
+    },
+    { passive: false }
+  );
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") goTo(current + 1);
+    if (e.key === "ArrowUp") goTo(current - 1);
+  });
+
+  let touchStartY = 0;
+  window.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartY = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+  window.addEventListener(
+    "touchend",
+    (e) => {
+      const diff = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+    },
+    { passive: true }
+  );
+</script>
