@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = "Me Estoy Mudando y Vendo Todo" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800;12..96,900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #f5f0e8;
+    --accent: #aaff00;
+    --black: #000000;
+    --red: #ff3333;
+    --border: 3px solid #000000;
+    --shadow-lime: 6px 6px 0px #aaff00;
+    --shadow-black: 6px 6px 0px #000000;
+    --font-display: "Bricolage Grotesque", sans-serif;
+    --font-body: "Space Grotesk", sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--black);
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+</style>
