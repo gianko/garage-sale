@@ -28,8 +28,9 @@ const itemWords = [
 <section class="hero">
   <p class="hero__eyebrow">{eyebrow}</p>
   <h1 class="hero__title">
-    Me mudo<br />
-    y <em>vendo</em><br />todo
+    <span class="line-clip"><span class="line-inner">Me mudo</span></span>
+    <span class="line-clip"><span class="line-inner">y <em>vendo</em></span></span>
+    <span class="line-clip"><span class="line-inner">todo</span></span>
   </h1>
   <p class="hero__subtitle">
     {availableCount} artículos disponibles · Precios sin regateo
@@ -72,8 +73,16 @@ const itemWords = [
     color: var(--black);
     text-transform: uppercase;
     letter-spacing: -0.03em;
-    text-wrap: balance;
     max-width: 16ch;
+  }
+
+  .line-clip {
+    display: block;
+    overflow: hidden;
+  }
+
+  .line-inner {
+    display: block;
   }
 
   .hero__title em {
@@ -114,3 +123,26 @@ const itemWords = [
     flex-direction: column;
   }
 </style>
+
+<script>
+  import gsap from "gsap";
+
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  tl.from(".hero__eyebrow", { y: -14, autoAlpha: 0, duration: 0.6 })
+    .from(
+      ".hero__title .line-inner",
+      { y: "115%", duration: 0.85, stagger: 0.1 },
+      "-=0.35"
+    )
+    .from(
+      ".hero__subtitle",
+      { y: 18, autoAlpha: 0, duration: 0.55 },
+      "-=0.45"
+    )
+    .from(
+      ".hero__marquees",
+      { y: 84, autoAlpha: 0, duration: 0.7, ease: "power3.inOut" },
+      "-=0.4"
+    );
+</script>
