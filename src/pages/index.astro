@@ -46,8 +46,10 @@ import items from "../data/items.json";
 </style>
 
 <script>
+  import itemsData from "../data/items.json";
+
   const slides = Array.from(
-    document.querySelectorAll("#slides-container > *")
+    document.querySelectorAll("#slides-container > section")
   ) as HTMLElement[];
   let current = 0;
 
@@ -67,7 +69,13 @@ import items from "../data/items.json";
     current = index;
     slides[index].scrollIntoView({ behavior: "smooth" });
   }
-  (window as any).goTo = goTo;
+
+  // thumbnail grid navigation: resolve item id → slide index (slides[0] = hero)
+  window.addEventListener("thumb:navigate", (e: Event) => {
+    const { itemId } = (e as CustomEvent<{ itemId: string }>).detail;
+    const itemIndex = itemsData.findIndex((item) => item.id === itemId);
+    if (itemIndex !== -1) goTo(itemIndex + 1);
+  });
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") goTo(current + 1);

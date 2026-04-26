@@ -31,12 +31,12 @@ const { items } = Astro.props;
   </div>
   <div class="thumb-overlay__body">
     <div class="thumb-grid">
-      {items.map((item, i) => {
+      {items.map((item) => {
         const rawSrc = item.image.replace("/images/", "/raw-images/");
         return (
           <button
             class:list={["thumb-card", { "thumb-card--sold": item.sold }]}
-            data-slide-index={i + 1}
+            data-item-id={item.id}
             aria-label={`Ir a ${item.name}`}
           >
             <div class="thumb-card__image-wrap">
@@ -62,7 +62,7 @@ const { items } = Astro.props;
 <style>
   .thumb-fab {
     position: fixed;
-    bottom: 24px;
+    top: 24px;
     left: 24px;
     z-index: 100;
     width: 54px;
@@ -251,9 +251,8 @@ const { items } = Astro.props;
   overlay.addEventListener("click", (e) => {
     const card = (e.target as HTMLElement).closest<HTMLElement>(".thumb-card");
     if (!card) return;
-    const index = Number(card.dataset.slideIndex);
+    const itemId = card.dataset.itemId!;
     closeOverlay();
-    // goTo is exposed on window by index.astro
-    (window as any).goTo(index);
+    window.dispatchEvent(new CustomEvent("thumb:navigate", { detail: { itemId } }));
   });
 </script>
