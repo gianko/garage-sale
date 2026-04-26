@@ -9,7 +9,7 @@ const eyebrow = `${SALE_LOCATION} · ${SALE_DATE}`;
 const heroWords = [
   "Me estoy mudando",
   "Vendo todo",
-  "Precios sin regateo",
+  "Precios insuperables",
   "Solo recogida",
   SALE_LOCATION,
   SALE_DATE,
@@ -17,10 +17,9 @@ const heroWords = [
   "Sin intermediarios",
 ];
 const itemWords = [
-  "Buen estado",
+  "Buen estado (ponele)",
   "Solo recogida en mano",
   "Sin envío",
-  "Precio fijo",
   "Primero en llegar",
   "Sin reservas",
 ];
@@ -29,8 +28,8 @@ const itemWords = [
 <section class="hero">
   <p class="hero__eyebrow">{eyebrow}</p>
   <h1 class="hero__title">
-    Me estoy<br />
-    mudando<br />y <em>vendo</em><br />todo
+    Me mudo<br />
+    y <em>vendo</em><br />todo
   </h1>
   <p class="hero__subtitle">
     {availableCount} artículos disponibles · Precios sin regateo
@@ -82,6 +81,7 @@ const itemWords = [
     color: var(--black);
     position: relative;
     display: inline-block;
+    isolation: isolate;
   }
 
   .hero__title em::after {
