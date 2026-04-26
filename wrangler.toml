@@ -1,8 +1,0 @@
-name = "garage-sale"
-main = "dist/server/entry.mjs"
-compatibility_date = "2026-04-15"
-no_bundle = true
-
-[assets]
-binding = "ASSETS"
-directory = "dist/client"
