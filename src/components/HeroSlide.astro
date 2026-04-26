@@ -126,22 +126,27 @@ const itemWords = [
 <script>
   import gsap from "gsap";
 
-const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  gsap.set(".hero__eyebrow", { autoAlpha: 0, y: -14 });
+  gsap.set(".hero__title .line-inner", { y: "115%" });
+  gsap.set(".hero__subtitle", { autoAlpha: 0, y: 18 });
+  gsap.set(".hero__marquees", { autoAlpha: 0, y: 84 });
 
-  tl.from(".hero__eyebrow", { y: -14, autoAlpha: 0, duration: 0.6 })
-    .from(
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  tl.to(".hero__eyebrow", { autoAlpha: 1, y: 0, duration: 0.6 })
+    .to(
       ".hero__title .line-inner",
-      { y: "115%", duration: 0.85, stagger: 0.1 },
+      { y: "0%", duration: 0.85, stagger: 0.1 },
       "-=0.35"
     )
-    .from(
+    .to(
       ".hero__subtitle",
-      { y: 18, autoAlpha: 0, duration: 0.55 },
+      { autoAlpha: 1, y: 0, duration: 0.55 },
       "-=0.45"
     )
-    .from(
+    .to(
       ".hero__marquees",
-      { y: 84, autoAlpha: 0, duration: 0.7, ease: "power3.inOut" },
+      { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.inOut" },
       "-=0.4"
     );
 </script>
