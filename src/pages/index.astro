@@ -24,75 +24,50 @@ import items from "../data/items.json";
     height: 100%;
     overflow: hidden;
   }
+
+  #slides-container > * {
+    scroll-snap-align: start;
+  }
 </style>
 
 <style>
   #slides-wrapper {
     height: 100vh;
-    overflow: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
   }
 
-  #slides-container {
-    will-change: transform;
+  #slides-wrapper::-webkit-scrollbar {
+    display: none;
   }
 </style>
 
 <script>
-  import gsap from "gsap";
-
-  const container = document.getElementById("slides-container") as HTMLElement;
-  const slides = Array.from(container.children) as HTMLElement[];
-  const total = slides.length;
+  const slides = Array.from(
+    document.querySelectorAll("#slides-container > *")
+  ) as HTMLElement[];
   let current = 0;
-  let locked = false;
+
+  // keep current in sync when user scrolls naturally
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) current = slides.indexOf(e.target as HTMLElement);
+      });
+    },
+    { threshold: 0.5 }
+  );
+  slides.forEach((s) => io.observe(s));
 
   function goTo(index: number) {
-    if (locked || index < 0 || index >= total) return;
-    locked = true;
+    if (index < 0 || index >= slides.length) return;
     current = index;
-    const offset = -slides[index].offsetTop;
-    gsap.to(container, {
-      y: offset,
-      duration: 0.7,
-      ease: "power3.inOut",
-      onComplete: () => {
-        locked = false;
-      },
-    });
+    slides[index].scrollIntoView({ behavior: "smooth" });
   }
-
-  window.addEventListener(
-    "wheel",
-    (e) => {
-      e.preventDefault();
-      if (e.deltaY > 0) goTo(current + 1);
-      else goTo(current - 1);
-    },
-    { passive: false }
-  );
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") goTo(current + 1);
     if (e.key === "ArrowUp") goTo(current - 1);
   });
-
-  let touchStartY = 0;
-  window.addEventListener(
-    "touchstart",
-    (e) => {
-      touchStartY = e.touches[0].clientY;
-    },
-    { passive: true }
-  );
-  window.addEventListener(
-    "touchend",
-    (e) => {
-      const diff = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) goTo(current + 1);
-        else goTo(current - 1);
-      }
-    },
-    { passive: true }
-  );
 </script>
