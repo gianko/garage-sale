@@ -121,16 +121,30 @@ const itemWords = [
     right: 0;
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(84px);
+  }
+
+  .hero__eyebrow {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-14px);
+  }
+
+  .hero__title .line-inner {
+    transform: translateY(115%);
+  }
+
+  .hero__subtitle {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(18px);
   }
 </style>
 
 <script>
   import gsap from "gsap";
-
-  gsap.set(".hero__eyebrow", { autoAlpha: 0, y: -14 });
-  gsap.set(".hero__title .line-inner", { y: "115%" });
-  gsap.set(".hero__subtitle", { autoAlpha: 0, y: 18 });
-  gsap.set(".hero__marquees", { autoAlpha: 0, y: 84 });
 
   const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 

@@ -93,17 +93,34 @@ const repeated = [...words, ...words, ...words, ...words];
 </style>
 
 <script>
-  // For -50% loop to be seamless, track must be >= 2x container width.
-  // Clone content until that threshold is met.
-  document.querySelectorAll(".marquee-strip").forEach((strip) => {
-    const track = strip.querySelector(".marquee-track");
+  function initMarquee(strip: Element) {
+    const track = strip.querySelector<HTMLElement>(".marquee-track");
     if (!track) return;
-    const needed = strip.clientWidth * 2;
-    if (needed <= 0) return;
+    const containerWidth = (strip as HTMLElement).clientWidth;
+    if (containerWidth <= 0) return;
+
+    // Read CSS duration before any cloning so getComputedStyle is clean.
+    const cssDuration = parseFloat(getComputedStyle(track).animationDuration) || 22;
+
+    // Clone until track is >= 2× container so the -50% loop is seamless.
     const seed = track.innerHTML;
     let guard = 0;
-    while (track.scrollWidth < needed && guard++ < 20) {
+    while (track.scrollWidth < containerWidth * 2 && guard++ < 20) {
       track.insertAdjacentHTML("beforeend", seed);
     }
+
+    // Normalize by container width: BASE = seconds to scroll one full viewport-width.
+    const BASE = 20;
+    const scaleFactor = cssDuration / 22;
+    const loopWidth = track.scrollWidth / 2;
+    const duration = (loopWidth / containerWidth) * BASE * scaleFactor;
+
+    // Restart animation with the corrected duration.
+    track.style.animationDuration = `${duration}s`;
+  }
+
+  // Wait for fonts so text widths (and therefore scrollWidth) are accurate.
+  document.fonts.ready.then(() => {
+    document.querySelectorAll(".marquee-strip").forEach(initMarquee);
   });
 </script>

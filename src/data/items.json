@@ -57,8 +57,8 @@
   },
   {
     "id": "wifi-deco-x15",
-    "name": "Sistema WiFi 6 Mesh",
-    "brand": "TP-Link Deco X15 (2-pack)",
+    "name": "Sistema WiFi 6 Mesh (2-pack)",
+    "brand": "TP-Link Deco X15",
     "description": "Sistema mesh WiFi 6 que cubre hasta 360m² con velocidades de hasta 1.500 Mbps — reemplaza el router y el extensor en un solo equipo. Dos puertos Gigabit por unidad con soporte para backhaul por cable y gestión desde la app. Soporta hasta 120 dispositivos.",
     "image": "/images/wifi-deco-x15.png",
     "sold": false
@@ -83,7 +83,7 @@
     "id": "aspiradora-shark",
     "name": "Aspiradora Shark HydroVac",
     "brand": "Shark HydroVac MessMaster WD261",
-    "description": "Sistema inalámbrico 3 en 1 que aspira, trapea y se autolimpia en una sola pasada — sin bolsa, sin líos. Hasta 35 minutos de autonomía con potente succión para pisos duros, cerámico y alfombras. Color rose gold, como nueva.",
+    "description": "Sistema inalámbrico 3 en 1 que aspira, trapea y se autolimpia en una sola pasada — sin bolsa, sin líos. Hasta 35 minutos de autonomía con potente succión para pisos duros, cerámico y alfombras. Color rose gold, como nueva. (+ respuestos)",
     "image": "/images/aspiradora-shark.png",
     "sold": false
   },
@@ -101,6 +101,14 @@
     "brand": "",
     "description": "Mueble de TV estilo industrial con superficie superior de madera oscura, estante intermedio abierto y dos cajones inferiores con tiradores metálicos. Estructura de caño de acero pintado negro con ruedas para fácil desplazamiento. Muy buen estado.",
     "image": "/images/mesa-televisor.png",
+    "sold": false
+  },
+  {
+    "id": "cuchara",
+    "name": "Cuchara",
+    "description": "Tiene valor sentimental",
+    "image": "/images/cuchara.png",
+    "brand": "",
     "sold": false
   },
   {
@@ -136,6 +144,14 @@
     "sold": false
   },
   {
+    "id": "furry",
+    "name": "Orange Fox Furry Head Full Mask",
+    "brand": "",
+    "description": "Máscara de cabeza completa de zorro con piel sintética naranja y blanca, ojos expresivos, orejas paradas y nariz negra esculpida. Lo mejor: la mandíbula se mueve al hablar — apoyá la parte inferior en el mentón y la boca abre y cierra sola. Ideal para fursuit o apariciones en personaje.",
+    "image": "/images/furry.png",
+    "sold": true
+  },
+  {
     "id": "corneta-wifi-sony",
     "name": "Corneta WiFi Sony",
     "brand": "Sony SRS-HG1",
@@ -155,7 +171,7 @@
     "id": "xenyx-q802-usb",
     "name": "Mixer Behringer Xenyx Q802",
     "brand": "Behringer Xenyx Q802 USB",
-    "description": "Mezcladora analógica compacta de 8 entradas con interfaz USB integrada — conecta micrófonos, instrumentos y monitores, y graba directo al computador sin interfaz adicional. Incluye preamplificadores XENYX, compresor de un knob y módulo de efectos con 16 presets. Perfecta para streaming, podcasting o home studio.",
+    "description": "Mezcladora analógica de 8 entradas con USB integrado — grabá directo al computador sin interfaz adicional. Incluye preamps XENYX, compresor de un knob y 16 presets de efectos.",
     "image": "/images/xenyx-q802-usb.png",
     "sold": false
   },

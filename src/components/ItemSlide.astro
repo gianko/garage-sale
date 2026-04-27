@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import MarqueeStrip from "./MarqueeStrip.astro";
 import type { Item } from "../data/types";
 
@@ -13,19 +14,21 @@ const { item, index, total } = Astro.props;
 const counter = `Artículo ${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
 const marqueeWords = [item.name, item.brand].filter(Boolean) as string[];
 const reverse = index % 2 !== 0;
-const rawImageSrc = item.image.replace("/images/", "/raw-images/");
 ---
 
 <section class="item-slide">
   <div class="item-slide__grid">
     <div class="item-slide__image-panel">
-      <div class:list={["item-slide__frame", { "item-slide__frame--sold": item.sold }]}>
-        <img
-          src={item.image}
-          alt={item.name}
-          class="item-slide__img"
-          onerror={`this.onerror=null;this.src='${rawImageSrc}'`}
-        />
+      <div class="item-slide__frame-wrap">
+        <div class:list={["item-slide__frame", { "item-slide__frame--sold": item.sold }]}>
+          <Image
+            src={item.image}
+            alt={item.name}
+            width={800}
+            height={600}
+            class="item-slide__img"
+          />
+        </div>
         {item.sold && <div class="item-slide__vendido">VENDIDO</div>}
       </div>
     </div>
@@ -71,10 +74,15 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
     padding: clamp(2rem, 5vw, 5rem);
   }
 
-  .item-slide__frame {
+  .item-slide__frame-wrap {
     position: relative;
     width: 100%;
     max-width: 560px;
+  }
+
+  .item-slide__frame {
+    position: relative;
+    width: 100%;
     aspect-ratio: 4 / 3;
     background: #e8e3da;
     border: var(--border);
@@ -97,7 +105,8 @@ const rawImageSrc = item.image.replace("/images/", "/raw-images/");
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(-15deg);
+    transform: translate(-50%, -60%) rotate(-15deg);
+    z-index: 1;
     font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 4.5rem);
     font-weight: 900;
