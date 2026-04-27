@@ -99,8 +99,10 @@ const repeated = [...words, ...words, ...words, ...words];
     const track = strip.querySelector(".marquee-track");
     if (!track) return;
     const needed = strip.clientWidth * 2;
+    if (needed <= 0) return;
     const seed = track.innerHTML;
-    while (track.scrollWidth < needed) {
+    let guard = 0;
+    while (track.scrollWidth < needed && guard++ < 20) {
       track.insertAdjacentHTML("beforeend", seed);
     }
   });
