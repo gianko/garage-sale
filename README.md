@@ -6,6 +6,15 @@ a page reload, and sent to the seller as a pre-filled WhatsApp message.
 
 Built with [Astro](https://astro.build) and deployed to Cloudflare Workers.
 
+**[→ Live demo](https://garage-sale.gian-olivieri.workers.dev/)**
+
+![The landing slide: oversized type reading "Me mudo y vendo todo", with looping marquee strips along the bottom edge](.github/assets/hero.png)
+
+Each item gets the full viewport — photo on the left, details and a one-tap
+wishlist button on the right, with the item's own marquee running underneath.
+
+![An item slide showing a ukulele photo beside its name, brand, description and a "Me interesa" button](.github/assets/item-slide.png)
+
 ## Features
 
 - **Vertical snap-scroll catalogue** — 26 items, one per full-height slide,
